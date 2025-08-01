@@ -1,0 +1,9 @@
+-- Tables:
+-- States state_name, state_id
+-- Counties county_name, county_id, state_id
+-- Cities city_name, city_id, county_id, state_id
+-- Accidents accident_id, city_id, county_id, state_id, date, latitude, longitude, notification_time, fatalities
+-- Vehicles vehicle_id, accident_id, fatalities (deaths), body_type_id
+-- Vehicle_Body_Type body_type_id, body_type_name PAGE 147 (142 in the book)
+-- Persons age, sex, vehicle_id, accident_id, injury_severity, helmet_use, type_id
+-- Person_Type type_id, type_name
