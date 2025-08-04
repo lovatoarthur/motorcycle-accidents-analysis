@@ -209,3 +209,6 @@ __marimo__/
 
 # Word
 *.docx
+
+*.csv
+*.CSV
