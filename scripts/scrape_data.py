@@ -1,4 +1,5 @@
 import requests
+import zipfile
 
 
 def download_zip_file(url, output_path):
@@ -31,6 +32,19 @@ def get_url(year):
     return f"https://static.nhtsa.gov/nhtsa/downloads/FARS/{year}/National/FARS{year}NationalCSV.zip"
 
 
+def unzip_and_delete_zip(zip_file_path, output_path):
+    """
+    Unzips the ZIP file and deletes it.
+    """
+    with zipfile.ZipFile(zip_file_path, "r") as zip_ref:
+        zip_ref.extractall(output_path)
+
+    # Delete the ZIP file
+    import os
+
+    os.remove(zip_file_path)
+
+
 def run():
     """
     Downloads the ZIP file for each year from 1975 to 2023.
@@ -39,10 +53,12 @@ def run():
 
     for year in years:
         url = get_url(year)
-        output_path = f"../data/FARS{year}NationalCSV.zip"
+        output_path = f"data/raw/{year}.zip"
+
         success = download_zip_file(url, output_path)
         if success:
-            print(f"Downloaded FARS{year}NationalCSV.zip to {output_path}")
+            unzip_and_delete_zip(output_path, f"data/raw/{year}")
+            print(f"Downloaded and unzipped FARS{year}NationalCSV.zip to {output_path}")
         else:
             print(f"Failed to download FARS{year}NationalCSV.zip")
 
